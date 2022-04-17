@@ -27,9 +27,10 @@ const Login = () => {
 
 
     const handelEmailChange = event => {
-        const email = event.target.value;
+        const emailRegex = /\S+@\S+\.\S+/;
+        const validEmail = emailRegex.test(event.target.value)
 
-        if (email) {
+        if (validEmail) {
             setUserInfo({ ...userInfo, email: event.target.value })
             setErrors({ ...errors, email: "" })
         } else {
@@ -38,7 +39,7 @@ const Login = () => {
         }
     }
 
-    const handelPasswordChange = event => {
+    const handelPasswordChange = (event) => {
         const password = /.{6,}/;
         const validPassword = password.test(event.target.value);
 
@@ -46,14 +47,16 @@ const Login = () => {
             setUserInfo({ ...userInfo, password: event.target.value })
             setErrors({ ...errors, password: "" })
         } else {
-            setUserInfo({ ...errors, password: "Minimum 6 charecter" })
-            setErrors({ ...userInfo, password: "" })
+            setErrors({ ...errors, password: "Minimum 6 charecter" })
+            setUserInfo({ ...userInfo, password: "" })
         }
     }
 
 
     const handelLogin = event => {
         event.preventDefault();
+
+        console.log(userInfo.email)
 
         signInWithEmailAndPassword(userInfo.email, userInfo.password)
     }
@@ -63,7 +66,7 @@ const Login = () => {
     // const from = location.state?.from?.pathname || "/";
 
     if (user) {
-        navigate('/services')
+        navigate('/checkout')
     }
 
     return (

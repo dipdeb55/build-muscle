@@ -66,6 +66,7 @@ const Signup = () => {
     const handelLogin = event => {
         event.preventDefault();
 
+            console.log(userInfo.email)
         createUserWithEmailAndPassword(userInfo.email, userInfo.password)
     }
 
