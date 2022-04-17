@@ -1,3 +1,7 @@
+body {
+    background-color: #1e1e1e;
+}
+
 .banner-container {
     position: relative;
     background: url('../../images/background1.jpg') center;

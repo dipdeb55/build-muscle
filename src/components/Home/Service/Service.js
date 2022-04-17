@@ -2,21 +2,25 @@ import { Button } from 'react-bootstrap';
 import React from 'react';
 import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
 import './Service.css'
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const Service = ({ service }) => {
     const { name, img, price, description } = service;
+
+    const navigate = useNavigate();
+
     return (
-        <div className='service-container'>
-            <Card style={{ width: '18rem' }}>
-                <Card.Img className='' variant="top" src={img} />
+        <div className='service-container text-white'>
+            <Card className='card-container' style={{ width: '18rem' }}>
+                <Card.Img className='rounded' variant="top" src={img} />
                 <Card.Body>
                     <Card.Title>{name}</Card.Title>
+                    <p>{price}</p>
                     <Card.Text>
-                        Some quick example text to build on the card title and make up the bulk of
-                        the card's content.
+                        {description}
                     </Card.Text>
-                    <Button variant="secondary" className="mx-2">Check Out</Button>
+                    <Button variant="secondary" className="mx-2" onClick={() => navigate('/checkout')}> Check Out</Button>
                 </Card.Body>
             </Card>
         </div>

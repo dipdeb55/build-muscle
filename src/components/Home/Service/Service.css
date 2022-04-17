@@ -1,3 +1,9 @@
 .service-container {
     margin-left: 180px;
+
+}
+
+.card-container {
+    background-color: rgb(61, 58, 53);
+    border-radius: 8px;
 }
