@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 
-const Login = () => {
+const Signup = () => {
 
     const [userInfo, setUserInfo] = useState({
         email: "",
-        password: ""
+        password: "",
+        confirmPassword: ""
     });
 
     const [errors, setErrors] = useState({
@@ -19,11 +20,11 @@ const Login = () => {
 
 
     const [
-        signInWithEmailAndPassword,
+        createUserWithEmailAndPassword,
         user,
         loading,
         error,
-    ] = useSignInWithEmailAndPassword(auth);
+    ] = useCreateUserWithEmailAndPassword(auth);
 
 
     const handelEmailChange = event => {
@@ -51,11 +52,21 @@ const Login = () => {
         }
     }
 
+    const handelConfirmPasswordChange = event => {
+        if (event.targrt.value === userInfo.password) {
+            setUserInfo({ ...userInfo, confirmPassword: event.target.value })
+            setErrors({ ...setErrors, confirmPassword: "" })
+        } else {
+            setErrors({ ...userInfo, confirmPassword: "Password Not Matched" })
+            setUserInfo({ ...setErrors, confirmPassword: "" })
+        }
+    }
+
 
     const handelLogin = event => {
         event.preventDefault();
 
-        signInWithEmailAndPassword(userInfo.email, userInfo.password)
+        createUserWithEmailAndPassword(userInfo.email, userInfo.password)
     }
 
     const navigate = useNavigate();
@@ -63,12 +74,13 @@ const Login = () => {
     // const from = location.state?.from?.pathname || "/";
 
     if (user) {
-        navigate('/services')
+        navigate('/login')
     }
+
 
     return (
         <div>
-            <h2 className='text-white'> Please log in</h2>
+            <h2 className='text-white'>Sign Up</h2>
             <div className='d-flex  justify-content-center'>
                 <Form onSubmit={handelLogin} className='w-50 text-white mt-4'>
                     <Form.Group className="mb-4" controlId="formBasicEmail">
@@ -79,10 +91,15 @@ const Login = () => {
                     </Form.Group>
                     <Form.Group controlId="formBasicCheckbox">
                     </Form.Group>
-                    <p>Don't have an account.<Link className='text-decoration-none' to='/signup'> SignUp</Link></p>
+                    <Form.Group controlId="formBasicPassword">
+                        <Form.Control className='mt-4' onChange={handelConfirmPasswordChange} type="password" placeholder="ConfirmPassword" required />
+                    </Form.Group>
+                    <Form.Group controlId="formBasicCheckbox">
+                    </Form.Group>
+
                     <p className='text-danger'>{error?.message}</p>
-                    <Button onClick={() => signInWithEmailAndPassword(userInfo.email, userInfo.password)} className='mt-4 px-5' variant="primary" type="submit">
-                        Login
+                    <Button onClick={() => createUserWithEmailAndPassword(userInfo.email, userInfo.password)} className='mt-4 px-5' variant="primary" type="submit">
+                        Signup
                     </Button>
                 </Form>
             </div>
@@ -90,4 +107,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Signup; 
