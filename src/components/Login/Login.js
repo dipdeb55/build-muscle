@@ -1,7 +1,10 @@
+import { Toast } from 'bootstrap';
+import { sendPasswordResetEmail } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useSignInWithEmailAndPassword, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 
 const Login = () => {
@@ -64,6 +67,13 @@ const Login = () => {
         signInWithEmailAndPassword(userInfo.email, userInfo.password)
     }
 
+    const handelResetPassword = () => {
+        sendPasswordResetEmail(auth, userInfo.email)
+            .then(() => {
+                toast("Password Reset successfully")
+            })
+    }
+
 
 
     const navigate = useNavigate();
@@ -87,8 +97,9 @@ const Login = () => {
                     </Form.Group>
                     <Form.Group controlId="formBasicCheckbox">
                     </Form.Group>
-                    <p>Don't have an account.<Link className='text-decoration-none' to='/signup'> SignUp</Link></p>
+                    <p className='pt-3'>Don't have an account.<Link className='text-decoration-none ' to='/signup'> SignUp</Link></p>
                     <p className='text-danger'>{error?.message}</p>
+                    <Button onClick={handelResetPassword} className='text-decoration-none' variant="link">Reset Password!</Button>
                     <Form.Group>
                         <Button className='me-3' onClick={() => signInWithGoogle()} variant="primary">Google</Button>
                         <Button onClick={() => signInWithGithub()} variant="dark">GitHub</Button>
