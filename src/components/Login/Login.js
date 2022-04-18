@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSignInWithEmailAndPassword, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 
@@ -24,6 +24,9 @@ const Login = () => {
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
+
+    const [signInWithGoogle] = useSignInWithGoogle(auth);
+    const [signInWithGithub] = useSignInWithGithub(auth);
 
 
     const handelEmailChange = event => {
@@ -61,6 +64,8 @@ const Login = () => {
         signInWithEmailAndPassword(userInfo.email, userInfo.password)
     }
 
+
+
     const navigate = useNavigate();
     // const location = useLocation();
     // const from = location.state?.from?.pathname || "/";
@@ -84,6 +89,10 @@ const Login = () => {
                     </Form.Group>
                     <p>Don't have an account.<Link className='text-decoration-none' to='/signup'> SignUp</Link></p>
                     <p className='text-danger'>{error?.message}</p>
+                    <Form.Group>
+                        <Button className='me-3' onClick={() => signInWithGoogle()} variant="primary">Google</Button>
+                        <Button onClick={() => signInWithGithub()} variant="dark">GitHub</Button>
+                    </Form.Group>
                     <Button onClick={() => signInWithEmailAndPassword(userInfo.email, userInfo.password)} className='mt-4 px-5' variant="primary" type="submit">
                         Login
                     </Button>
