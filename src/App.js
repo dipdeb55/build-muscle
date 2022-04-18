@@ -10,6 +10,7 @@ import Login from './components/Login/Login';
 import Signup from './components/SignUp/Signup';
 import Blogs from './components/Blogs/Blogs';
 import Notfound from './components/Notfound/Notfound';
+import AboutMe from './components/AboutMe/AboutMe';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         }></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/signup' element={<Signup></Signup>}></Route>
+        <Route path='/aboutme' element={<AboutMe></AboutMe>}></Route>
         <Route path='/blog' element={<Blogs></Blogs>}></Route>
         <Route path='*' element={<Notfound></Notfound>}></Route>
       </Routes>

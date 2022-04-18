@@ -18,3 +18,8 @@
 .header a:hover {
     color: rgb(119, 161, 54);
 }
+
+.header img {
+    width: 90px;
+    height: 80px;
+}
