@@ -24,7 +24,7 @@ const Signup = () => {
         user,
         loading,
         error,
-    ] = useCreateUserWithEmailAndPassword(auth);
+    ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
 
 
     const handelEmailChange = event => {
@@ -47,18 +47,18 @@ const Signup = () => {
             setUserInfo({ ...userInfo, password: event.target.value })
             setErrors({ ...errors, password: "" })
         } else {
-            setUserInfo({ ...errors, password: "Minimum 6 charecter" })
-            setErrors({ ...userInfo, password: "" })
+            setErrors({ ...errors, password: "Minimum 6 charecter" })
+            setUserInfo({ ...userInfo, password: "" })
         }
     }
 
     const handelConfirmPasswordChange = event => {
         if (event.targrt.value === userInfo.password) {
             setUserInfo({ ...userInfo, confirmPassword: event.target.value })
-            setErrors({ ...setErrors, confirmPassword: "" })
+            setErrors({ ...setErrors, password: "" })
         } else {
-            setErrors({ ...userInfo, confirmPassword: "Password Not Matched" })
-            setUserInfo({ ...setErrors, confirmPassword: "" })
+            setErrors({ ...errors, password: "Password Not Matched" })
+            setUserInfo({ ...userInfo, confirmPassword: "" })
         }
     }
 
@@ -66,7 +66,7 @@ const Signup = () => {
     const handelLogin = event => {
         event.preventDefault();
 
-            console.log(userInfo.email)
+        console.log(userInfo.email)
         createUserWithEmailAndPassword(userInfo.email, userInfo.password)
     }
 
@@ -95,6 +95,7 @@ const Signup = () => {
                     <Form.Group controlId="formBasicPassword">
                         <Form.Control className='mt-4' onChange={handelConfirmPasswordChange} type="password" placeholder="ConfirmPassword" required />
                     </Form.Group>
+                    {errors?.password && <p className="text-danger">{errors.password}</p>}
                     <Form.Group controlId="formBasicCheckbox">
                     </Form.Group>
 
