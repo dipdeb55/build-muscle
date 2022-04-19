@@ -1,8 +1,8 @@
 
-##Individual Service Provider
+## Individual Service Provider
 ​
 
-## Click [http://assignment-10-8761e.firebaseapp.com](http://assignment-10-8761e.firebaseapp.com) to visit website
+# Click [http://assignment-10-8761e.firebaseapp.com](http://assignment-10-8761e.firebaseapp.com) to visit website
 
 - Different services
 - Checkout 
@@ -11,7 +11,7 @@
 - Protected Route
 ​
 ​
-##Frameworks/Libraries
+## Frameworks/Libraries
 1. React
 2. React firebase hook
 3. React Bootstrap
