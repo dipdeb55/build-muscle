@@ -7,13 +7,17 @@ import auth from '../../firebase.init';
 
 const Signup = () => {
 
+    const [name, setName] = useState('')
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
     const [createUserWithEmailAndPassword, user] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true })
+
+    const handleNameBlur = event => {
+        setName(event.target.value)
+    }
 
     const handleEmailBlur = event => {
         setEmail(event.target.value);
@@ -23,9 +27,6 @@ const Signup = () => {
         setPassword(event.target.value);
     }
 
-    const handleConfirmPasswordBlur = event => {
-        setConfirmPassword(event.target.value);
-    }
 
     if (user) {
         navigate('/checkout');
@@ -33,10 +34,7 @@ const Signup = () => {
 
     const handleCreateUser = event => {
         event.preventDefault();
-        if (password !== confirmPassword) {
-            setError('passwords did not match');
-            return;
-        }
+
         if (password.length < 6) {
             setError('Password must be 6 characters or longer');
             return;
@@ -52,15 +50,15 @@ const Signup = () => {
             <div className='d-flex  justify-content-center'>
                 <Form onSubmit={handleCreateUser} className='w-50 text-white mt-4'>
                     <Form.Group className="mb-4" controlId="formBasicEmail">
+                        <Form.Control onBlur={handleNameBlur} type="text" placeholder="Name " required />
+                    </Form.Group>
+                    <Form.Group className="mb-4" controlId="formBasicEmail">
                         <Form.Control onBlur={handleEmailBlur} type="email" placeholder="Enter email" required />
                     </Form.Group>
                     <Form.Group controlId="formBasicPassword">
                         <Form.Control onBlur={handlePasswordBlur} type="password" placeholder="Password" required />
                     </Form.Group>
                     <Form.Group controlId="formBasicCheckbox">
-                    </Form.Group>
-                    <Form.Group controlId="formBasicPassword">
-                        <Form.Control className='mt-4' onBlur={handleConfirmPasswordBlur} type="password" placeholder="ConfirmPassword" required />
                     </Form.Group>
                     {error?.password && <p className="text-danger">{error.password}</p>}
                     <Form.Group controlId="formBasicCheckbox">
