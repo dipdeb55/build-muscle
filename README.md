@@ -5,10 +5,10 @@
 ## Click [http://assignment-10-8761e.firebaseapp.com](http://assignment-10-8761e.firebaseapp.com) to visit website
 
 - Different services
-- Checkout 
-- Login 
-- Sign Up
-- Protected Route
+- User can purchase a package
+- User login with firebase authentication or google sign in
+- CheckOut Section
+
 ​
 ​
 ## Frameworks/Libraries

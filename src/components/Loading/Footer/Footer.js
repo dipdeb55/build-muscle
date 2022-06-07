@@ -4,7 +4,7 @@ import './Footer.css'
 
 const Footer = () => {
     return (
-        <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top text-white">
+        <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top ">
             <div className='d-flex'>
                 <div>
                     <ul class="nav col-md-4 justify-content-start ps-3 m-3">

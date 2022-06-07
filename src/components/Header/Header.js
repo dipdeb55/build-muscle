@@ -25,7 +25,8 @@ const Header = () => {
                     user ?
                         <button type="button" onClick={handelSignout} class="btn btn-secondary ms-4">Sign Out</button>
                         :
-                        <Link to='/login'>Login</Link>}
+                        <Link to='/login'>Login</Link>
+                }
             </div>
         </nav>
     );
